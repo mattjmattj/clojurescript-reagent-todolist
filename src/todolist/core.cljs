@@ -1,6 +1,6 @@
 (ns todolist.core
   (:require [reagent.core :as r]
-            [todolist.components :as components]
+            [todolist.components :refer [todo-list]]
             [todolist.store :as store]))
 
 (enable-console-print!)
@@ -10,7 +10,11 @@
 (defn main []
   [:div
     [:h1 "Todo list app"]
-    [components/todo-list]
+    (todo-list {
+      :todos @store/todos
+      :on-new-todo store/add-todo!
+      :on-toggle-todo store/toggle-todo!
+    })
   ])
 
 
